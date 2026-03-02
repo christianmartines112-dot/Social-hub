@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="tiktok-domain-verification" content="GTFWiwl6KXlPqHRFWkDxVqycbOeagZn3" />
+<title>SocialHub — All-in-One Social Media Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #080b14;
+  --bg2: #0d1120;
+  --bg3: #111827;
+  --border: rgba(255,255,255,0.07);
+  --accent: #3b7fff;
+  --accent2: #ff2d55;
+  --text: #f0f4ff;
+  --muted: rgba(240,244,255,0.45);
+  --card: rgba(255,255,255,0.04);
+  --green: #22c55e;
+  --yellow: #f59e0b;
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ======================== LANDING ======================== */
+#landing { min-height: 100vh; }
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 40px; background: rgba(8,11,20,0.85);
+  backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #3b7fff, #ff2d55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-btn { padding: 9px 22px; background: linear-gradient(135deg, #3b7fff, #0052cc); color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+.hero { text-align: center; padding: 110px 24px 80px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 900px; height: 700px; background: radial-gradient(ellipse, rgba(59,127,255,0.12) 0%, transparent 65%); pointer-events: none; }
+.hero::after { content: ''; position: absolute; top: 200px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(255,45,85,0.07) 0%, transparent 65%); pointer-events: none; }
+.badge { display: inline-block; background: rgba(59,127,255,0.12); border: 1px solid rgba(59,127,255,0.35); color: #7aa8ff; padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 28px; letter-spacing: 0.3px; }
+.hero h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 800; line-height: 1.05; margin-bottom: 22px; }
+.hero h1 span { background: linear-gradient(135deg, #3b7fff, #ff2d55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 auto 40px; line-height: 1.75; }
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { padding: 15px 34px; background: linear-gradient(135deg, #3b7fff, #0052cc); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; font-family: 'DM Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 30px rgba(59,127,255,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(59,127,255,0.4); }
+.btn-secondary { padding: 15px 34px; background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; font-weight: 600; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+.platforms { display: flex; justify-content: center; gap: 16px; padding: 40px 24px 20px; flex-wrap: wrap; }
+.platform-pill { display: flex; align-items: center; gap: 10px; padding: 11px 22px; background: var(--card); border: 1px solid var(--border); border-radius: 50px; font-size: 14px; font-weight: 600; transition: border-color 0.2s; }
+.platform-pill:hover { border-color: rgba(255,255,255,0.2); }
+.platform-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.section-label { text-align: center; font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 14px; }
+.section-title { text-align: center; font-size: clamp(28px, 4vw, 46px); font-weight: 800; margin-bottom: 16px; }
+.section-sub { text-align: center; color: var(--muted); font-size: 16px; max-width: 500px; margin: 0 auto 56px; line-height: 1.7; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 30px; transition: border-color 0.3s, transform 0.3s; }
+.feature-card:hover { border-color: rgba(59,127,255,0.35); transform: translateY(-3px); }
+.feature-icon { font-size: 36px; margin-bottom: 18px; }
+.feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.feature-card p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+.step-card { text-align: center; padding: 32px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 18px; transition: border-color 0.3s; }
+.step-card:hover { border-color: rgba(59,127,255,0.3); }
+.step-num { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #3b7fff, #0052cc); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin: 0 auto 18px; font-family: 'Syne', sans-serif; }
+.step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.step-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+.cta-section { margin: 0 24px 80px; background: linear-gradient(135deg, rgba(59,127,255,0.15), rgba(255,45,85,0.08)); border: 1px solid rgba(59,127,255,0.25); border-radius: 24px; padding: 72px 24px; text-align: center; max-width: 1100px; margin-left: auto; margin-right: auto; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(59,127,255,0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-section h2 { font-size: clamp(26px, 4vw, 44px); font-weight: 800; margin-bottom: 16px; }
+.cta-section p { color: var(--muted); font-size: 17px; margin-bottom: 36px; }
+
+footer { border-top: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+footer p { color: rgba(255,255,255,0.3); font-size: 13px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 13px; }
+.footer-links a:hover { color: var(--text); }
+
+/* LEGAL */
+.legal { display: none; max-width: 800px; margin: 60px auto; padding: 0 24px 80px; }
+.legal h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+.legal .date { color: var(--muted); font-size: 13px; margin-bottom: 32px; }
+.legal h2 { font-size: 18px; font-weight: 700; margin: 28px 0 10px; color: #7aa8ff; }
+.legal p, .legal li { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.85; margin-bottom: 10px; }
+.legal ul { padding-left: 20px; }
+.legal a { color: #7aa8ff; }
+#home-section { display: block; }
+
+/* ======================== TIKTOK CONNECT ======================== */
+#tiktok-connect {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+#tiktok-connect::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,45,85,0.1) 0%, transparent 65%);
+}
+.connect-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 24px;
+  padding: 52px 44px; max-width: 440px; width: 90%; text-align: center;
+  position: relative; z-index: 1;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+.tiktok-logo { font-size: 52px; margin-bottom: 20px; }
+.connect-card h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+.connect-card p { color: var(--muted); font-size: 15px; margin-bottom: 32px; line-height: 1.7; }
+.permissions-list { text-align: left; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; margin-bottom: 28px; }
+.permissions-list p { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
+.perm-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.8); }
+.perm-icon { width: 20px; height: 20px; background: rgba(34,197,94,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+.btn-tiktok { width: 100%; padding: 16px; background: #000; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.2s; margin-bottom: 12px; }
+.btn-tiktok:hover { background: #1a1a1a; }
+.btn-back-link { color: var(--muted); font-size: 14px; cursor: pointer; text-decoration: underline; background: none; border: none; font-family: 'DM Sans', sans-serif; }
+
+/* ======================== LOADING ======================== */
+#loading-screen {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--bg);
+}
+.loader-logo { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #3b7fff, #ff2d55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; }
+.loader-bar-wrap { width: 280px; height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
+.loader-bar { height: 100%; background: linear-gradient(90deg, #3b7fff, #ff2d55); border-radius: 4px; animation: loadBar 2.5s ease forwards; }
+@keyframes loadBar { 0%{width:0%} 30%{width:40%} 70%{width:75%} 100%{width:100%} }
+.loader-text { color: var(--muted); font-size: 14px; }
+
+/* ======================== DASHBOARD ======================== */
+#dashboard { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px; flex-shrink: 0; background: var(--bg2);
+  border-right: 1px solid var(--border); padding: 28px 0;
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; height: 100vh; z-index: 50;
+}
+.sidebar-logo { padding: 0 24px 28px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.sidebar-logo span { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, #3b7fff, #ff2d55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 24px; margin: 2px 12px; border-radius: 12px;
+  color: var(--muted); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; text-decoration: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+.nav-item.active { background: rgba(59,127,255,0.12); color: #7aa8ff; }
+.nav-item .nav-icon { font-size: 18px; width: 22px; text-align: center; }
+.sidebar-bottom { margin-top: auto; padding: 20px 24px; border-top: 1px solid var(--border); }
+.user-pill { display: flex; align-items: center; gap: 10px; }
+.user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #ff2d55, #ff6b35); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: white; flex-shrink: 0; font-family: 'Syne', sans-serif; }
+.user-info .user-name { font-size: 13px; font-weight: 600; }
+.user-info .user-platform { font-size: 11px; color: var(--green); }
+
+/* MAIN CONTENT */
+.main-content { flex: 1; margin-left: 240px; padding: 32px; max-width: calc(100vw - 240px); }
+.dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+.dash-title { font-size: 26px; font-weight: 800; }
+.dash-subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.header-actions { display: flex; gap: 12px; align-items: center; }
+
+/* STATS ROW */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+.stat-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.stat-value { font-size: 28px; font-weight: 800; font-family: 'Syne', sans-serif; margin-bottom: 4px; }
+.stat-change { font-size: 12px; color: var(--green); font-weight: 600; }
+.stat-change.down { color: #f87171; }
+
+/* TAB VIEWS */
+.tab-view { display: none; }
+.tab-view.active { display: block; }
+
+/* TRENDING */
+.search-bar-wrap { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.search-input { flex: 1; min-width: 200px; padding: 13px 18px; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 15px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; }
+.search-input:focus { border-color: rgba(59,127,255,0.5); }
+.search-input::placeholder { color: var(--muted); }
+.btn-search { padding: 13px 24px; background: linear-gradient(135deg, #3b7fff, #0052cc); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; transition: opacity 0.2s; }
+.btn-search:hover { opacity: 0.9; }
+.platform-filter { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn { padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--muted); font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.filter-btn.active { background: rgba(59,127,255,0.15); border-color: rgba(59,127,255,0.4); color: #7aa8ff; }
+.filter-btn:hover:not(.active) { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+.videos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.video-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.3s, transform 0.2s; cursor: pointer; }
+.video-card:hover { border-color: rgba(59,127,255,0.35); transform: translateY(-2px); }
+.video-thumb { height: 158px; position: relative; overflow: hidden; }
+.video-thumb-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+.video-platform-badge { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+.badge-yt { background: rgba(255,0,0,0.85); }
+.badge-tt { background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); }
+.badge-fb { background: rgba(24,119,242,0.85); }
+.video-views { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+.video-info { padding: 16px; }
+.video-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.video-meta { display: flex; align-items: center; justify-content: space-between; }
+.video-channel { font-size: 12px; color: var(--muted); }
+.btn-save { padding: 6px 14px; background: rgba(59,127,255,0.12); border: 1px solid rgba(59,127,255,0.25); color: #7aa8ff; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.btn-save:hover { background: rgba(59,127,255,0.25); }
+.btn-save.saved { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.25); color: var(--green); }
+
+/* AI GENERATOR */
+.generator-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media(max-width:900px) { .generator-layout { grid-template-columns: 1fr; } }
+.gen-panel { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; }
+.gen-panel h3 { font-size: 18px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.form-group { margin-bottom: 18px; }
+.form-label { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+.form-input { width: 100%; padding: 13px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: rgba(59,127,255,0.5); }
+.form-textarea { width: 100%; padding: 13px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; resize: vertical; min-height: 100px; }
+.form-textarea:focus { border-color: rgba(59,127,255,0.5); }
+.platform-check-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.platform-check { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; user-select: none; }
+.platform-check.selected { border-color: rgba(59,127,255,0.4); background: rgba(59,127,255,0.1); color: #7aa8ff; }
+.btn-generate { width: 100%; padding: 15px; background: linear-gradient(135deg, #3b7fff, #0052cc); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 6px; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-generate:hover { opacity: 0.9; }
+.btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.output-panel { min-height: 200px; }
+.output-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; color: var(--muted); font-size: 14px; text-align: center; gap: 12px; }
+.output-empty-icon { font-size: 40px; opacity: 0.4; }
+.output-block { margin-bottom: 20px; }
+.output-block-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.platform-dot-sm { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.output-item { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; font-size: 14px; line-height: 1.6; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.output-item-text { flex: 1; }
+.btn-copy { padding: 5px 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 7px; font-size: 12px; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; flex-shrink: 0; transition: all 0.2s; }
+.btn-copy:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+.btn-copy.copied { color: var(--green); border-color: rgba(34,197,94,0.3); }
+.hashtags-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.hashtag-pill { padding: 5px 12px; background: rgba(59,127,255,0.1); border: 1px solid rgba(59,127,255,0.2); border-radius: 20px; font-size: 13px; color: #7aa8ff; cursor: pointer; transition: background 0.2s; }
+.hashtag-pill:hover { background: rgba(59,127,255,0.2); }
+.generating-indicator { display: flex; align-items: center; gap: 12px; padding: 20px; color: var(--muted); font-size: 14px; }
+.dot-pulse { display: flex; gap: 5px; }
+.dot-pulse span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.2s ease-in-out infinite; }
+.dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
+.dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+
+/* SCHEDULER */
+.scheduler-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; }
+@media(max-width:900px) { .scheduler-layout { grid-template-columns: 1fr; } }
+.schedule-form { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; }
+.schedule-form h3 { font-size: 18px; font-weight: 800; margin-bottom: 22px; }
+.upload-zone { border: 2px dashed rgba(255,255,255,0.12); border-radius: 14px; padding: 40px; text-align: center; margin-bottom: 20px; cursor: pointer; transition: border-color 0.2s; }
+.upload-zone:hover { border-color: rgba(59,127,255,0.4); }
+.upload-zone-icon { font-size: 40px; margin-bottom: 12px; }
+.upload-zone p { color: var(--muted); font-size: 14px; }
+.upload-zone strong { color: var(--text); }
+.time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.time-slot { padding: 10px; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; text-align: center; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.time-slot:hover { border-color: rgba(59,127,255,0.4); color: #7aa8ff; }
+.time-slot.selected { background: rgba(59,127,255,0.12); border-color: rgba(59,127,255,0.4); color: #7aa8ff; }
+.time-slot .slot-label { font-size: 10px; color: var(--muted); font-weight: 400; display: block; margin-top: 2px; }
+.btn-schedule { width: 100%; padding: 15px; background: linear-gradient(135deg, #3b7fff, #0052cc); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 20px; transition: opacity 0.2s; }
+.btn-schedule:hover { opacity: 0.9; }
+
+.queue-panel { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; height: fit-content; }
+.queue-panel h3 { font-size: 16px; font-weight: 800; margin-bottom: 18px; }
+.queue-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.queue-item:last-child { border-bottom: none; }
+.queue-thumb { width: 52px; height: 52px; border-radius: 10px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.queue-info { flex: 1; min-width: 0; }
+.queue-title { font-size: 13px; font-weight: 600; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.queue-time { font-size: 11px; color: var(--muted); }
+.queue-platforms { display: flex; gap: 4px; margin-top: 5px; }
+.q-dot { width: 16px; height: 16px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; }
+.status-badge { padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.status-scheduled { background: rgba(59,127,255,0.15); color: #7aa8ff; }
+.status-published { background: rgba(34,197,94,0.15); color: var(--green); }
+.status-pending { background: rgba(245,158,11,0.15); color: var(--yellow); }
+
+/* PUBLISH MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 40px; max-width: 460px; width: 90%; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.6); }
+.modal-icon { font-size: 56px; margin-bottom: 20px; }
+.modal h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+.modal p { color: var(--muted); font-size: 15px; margin-bottom: 28px; line-height: 1.7; }
+.modal-platforms { display: flex; justify-content: center; gap: 16px; margin-bottom: 28px; }
+.modal-platform { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.modal-platform-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.modal-platform-name { font-size: 12px; color: var(--muted); font-weight: 600; }
+.modal-progress { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
+.modal-progress-bar { height: 100%; background: linear-gradient(90deg, #3b7fff, #ff2d55); border-radius: 4px; width: 0%; transition: width 0.3s; }
+.modal-btns { display: flex; gap: 12px; justify-content: center; }
+.btn-modal-primary { padding: 13px 28px; background: linear-gradient(135deg, #3b7fff, #0052cc); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.btn-modal-cancel { padding: 13px 28px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+/* LIBRARY */
+.library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.lib-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.lib-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 44px; position: relative; }
+.lib-body { padding: 16px; }
+.lib-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.lib-actions { display: flex; gap: 8px; }
+.lib-btn { flex: 1; padding: 9px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border); background: var(--card); color: var(--muted); transition: all 0.2s; }
+.lib-btn:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+.lib-btn.primary { background: rgba(59,127,255,0.12); border-color: rgba(59,127,255,0.3); color: #7aa8ff; }
+.lib-btn.primary:hover { background: rgba(59,127,255,0.2); }
+.empty-library { text-align: center; padding: 80px 24px; color: var(--muted); }
+.empty-library-icon { font-size: 52px; margin-bottom: 16px; opacity: 0.4; }
+
+/* TOAST */
+.toast { position: fixed; bottom: 28px; right: 28px; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 16px 22px; font-size: 14px; font-weight: 600; box-shadow: 0 20px 60px rgba(0,0,0,0.4); z-index: 9999; transform: translateY(80px); opacity: 0; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: rgba(34,197,94,0.3); }
+.toast.error { border-color: rgba(248,113,113,0.3); }
+
+@media(max-width:768px) {
+  .sidebar { width: 64px; }
+  .sidebar-logo, .nav-item span, .user-info { display: none; }
+  .nav-item { justify-content: center; padding: 12px; margin: 2px 6px; }
+  .main-content { margin-left: 64px; padding: 20px 16px; max-width: calc(100vw - 64px); }
+  .generator-layout, .scheduler-layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== LANDING ===================== -->
+<div class="page active" id="page-landing">
+  <div id="landing">
+    <div id="home-section">
+      <nav>
+        <div class="logo">🌐 SocialHub</div>
+        <div class="nav-links">
+          <a href="#" onclick="scrollTo(0,0)">Home</a>
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#" onclick="showLegalPage('terms')">Terms</a>
+          <a href="#" onclick="showLegalPage('privacy')">Privacy</a>
+        </div>
+        <button class="nav-btn" onclick="goToConnect()">Get Started</button>
+      </nav>
+
+      <section class="hero">
+        <div class="badge">✨ Powered by AI</div>
+        <h1>Manage All Your<br><span>Social Media</span><br>In One Place</h1>
+        <p>SocialHub is an AI-powered dashboard to discover trending content, generate viral titles & hashtags, and publish automatically to YouTube, TikTok, and Facebook.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="goToConnect()">🚀 Start for Free</button>
+          <a class="btn-secondary" href="#features">See Features</a>
+        </div>
+      </section>
+
+      <div class="platforms">
+        <div class="platform-pill"><div class="platform-dot" style="background:#FF0000"></div> YouTube</div>
+        <div class="platform-pill"><div class="platform-dot" style="background:#FF0050"></div> TikTok</div>
+        <div class="platform-pill"><div class="platform-dot" style="background:#1877F2"></div> Facebook</div>
+        <div class="platform-pill"><div class="platform-dot" style="background:#25D366"></div> AI Assistant</div>
+      </div>
+
+      <section class="section" id="features">
+        <div class="section-label">Features</div>
+        <div class="section-title">Everything you need to grow</div>
+        <div class="section-sub">One dashboard to rule all your social media platforms with the power of AI.</div>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon">🔥</div><h3>Trending Video Finder</h3><p>AI automatically finds the most viewed videos on YouTube, TikTok and Facebook for any topic you choose.</p></div>
+          <div class="feature-card"><div class="feature-icon">✍️</div><h3>Auto Title & Hashtag Generator</h3><p>Generate optimized titles and viral hashtags for all 3 platforms simultaneously with one click.</p></div>
+          <div class="feature-card"><div class="feature-icon">📅</div><h3>Smart Scheduler</h3><p>AI suggests the best posting times. Schedule content and let SocialHub publish automatically.</p></div>
+          <div class="feature-card"><div class="feature-icon">📊</div><h3>Analytics Dashboard</h3><p>Track your growth across all platforms in one unified analytics view.</p></div>
+          <div class="feature-card"><div class="feature-icon">🤖</div><h3>AI Content Assistant</h3><p>Chat with your AI assistant to brainstorm content ideas, scripts, and strategies.</p></div>
+          <div class="feature-card"><div class="feature-icon">🚀</div><h3>One-Click Publish</h3><p>Publish to YouTube, TikTok, and Facebook simultaneously with a single click.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="section-label">How it works</div>
+        <div class="section-title">From idea to published in minutes</div>
+        <div class="section-sub">A fully automated workflow powered by AI.</div>
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">1</div><h3>Find Trending</h3><p>AI discovers the most viewed videos in your niche</p></div>
+          <div class="step-card"><div class="step-num">2</div><h3>Save to Library</h3><p>Store videos in your personal dashboard library</p></div>
+          <div class="step-card"><div class="step-num">3</div><h3>Generate Content</h3><p>AI creates titles, hashtags and captions automatically</p></div>
+          <div class="step-card"><div class="step-num">4</div><h3>Schedule</h3><p>Pick the best time or let AI decide for you</p></div>
+          <div class="step-card"><div class="step-num">5</div><h3>Auto Publish</h3><p>SocialHub posts to all 3 platforms simultaneously</p></div>
+        </div>
+      </section>
+
+      <div class="cta-section">
+        <h2>Ready to automate your social media? 🚀</h2>
+        <p>Join thousands of creators using SocialHub to grow faster with AI.</p>
+        <button class="btn-primary" onclick="goToConnect()">Get Started for Free →</button>
+      </div>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="legal" id="terms-section">
+      <h1>Terms of Service</h1>
+      <div class="date">Last updated: February 28, 2026</div>
+      <p>Welcome to SocialHub. By accessing or using our platform, you agree to be bound by these Terms of Service.</p>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By using SocialHub, you confirm that you are at least 13 years old and agree to these terms.</p>
+      <h2>2. Description of Service</h2>
+      <p>SocialHub provides an AI-powered social media management dashboard that allows users to discover trending content, generate titles and hashtags, schedule posts, and publish content to third-party social media platforms including YouTube, TikTok, and Facebook.</p>
+      <h2>3. Third-Party Platforms</h2>
+      <p>SocialHub integrates with third-party platforms. Your use of these platforms is subject to their respective terms of service:</p>
+      <ul>
+        <li><a href="https://www.tiktok.com/legal/page/us/terms-of-service/en" target="_blank">TikTok Terms of Service</a></li>
+        <li><a href="https://www.youtube.com/t/terms" target="_blank">YouTube Terms of Service</a></li>
+        <li><a href="https://www.facebook.com/terms.php" target="_blank">Facebook Terms of Service</a></li>
+      </ul>
+      <h2>4. User Responsibilities</h2>
+      <ul>
+        <li>You are responsible for all content published through SocialHub</li>
+        <li>You must not use SocialHub to publish illegal, harmful, or infringing content</li>
+        <li>You must comply with all applicable platform policies</li>
+      </ul>
+      <h2>5. Intellectual Property</h2>
+      <p>You retain ownership of all content you create and publish using SocialHub.</p>
+      <h2>6. Limitation of Liability</h2>
+      <p>SocialHub is provided "as is" without warranties of any kind.</p>
+      <h2>7. Contact</h2>
+      <p>For questions about these Terms, contact us at: legal@socialhub.app</p>
+      <br>
+      <button class="btn-primary" onclick="showLegalPage('home')">← Back to Home</button>
+    </div>
+
+    <div class="legal" id="privacy-section">
+      <h1>Privacy Policy</h1>
+      <div class="date">Last updated: February 28, 2026</div>
+      <p>SocialHub is committed to protecting your privacy. This policy explains how we collect, use, and protect your information.</p>
+      <h2>1. Information We Collect</h2>
+      <ul>
+        <li><strong>Account information:</strong> Name, email address, and profile data</li>
+        <li><strong>Social media tokens:</strong> OAuth tokens to connect your social media accounts</li>
+        <li><strong>Content data:</strong> Posts, videos, and media you schedule or publish</li>
+        <li><strong>Usage data:</strong> How you interact with our dashboard</li>
+      </ul>
+      <h2>2. How We Use Your Information</h2>
+      <ul>
+        <li>To provide and improve our services</li>
+        <li>To publish content to your connected social media accounts</li>
+        <li>To generate AI-powered content suggestions</li>
+      </ul>
+      <h2>3. TikTok API Data</h2>
+      <p>When you connect your TikTok account, we access only the data necessary to publish content on your behalf. We comply with TikTok's Platform Policy. We do not store your TikTok credentials — only secure OAuth tokens.</p>
+      <h2>4. Data Security</h2>
+      <p>All data is transmitted over encrypted HTTPS connections.</p>
+      <h2>5. Contact</h2>
+      <p>For privacy questions: privacy@socialhub.app</p>
+      <br>
+      <button class="btn-primary" onclick="showLegalPage('home')">← Back to Home</button>
+    </div>
+
+    <footer>
+      <p>© 2026 SocialHub. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#" onclick="showLegalPage('terms')">Terms of Service</a>
+        <a href="#" onclick="showLegalPage('privacy')">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- ===================== TIKTOK CONNECT ===================== -->
+<div class="page" id="page-connect">
+  <div id="tiktok-connect">
+    <div class="connect-card">
+      <div class="tiktok-logo">🎵</div>
+      <h2>Connect your TikTok</h2>
+      <p>SocialHub needs permission to publish content to your TikTok account on your behalf.</p>
+      <div class="permissions-list">
+        <p>Permissions requested</p>
+        <div class="perm-item"><div class="perm-icon">✓</div> user.info.basic — View your profile info</div>
+        <div class="perm-item"><div class="perm-icon">✓</div> video.upload — Upload videos</div>
+        <div class="perm-item"><div class="perm-icon">✓</div> video.publish — Publish to your profile</div>
+      </div>
+      <button class="btn-tiktok" onclick="connectTikTok()">
+        <span>🎵</span> Authorize with TikTok
+      </button>
+      <button class="btn-back-link" onclick="showPage('page-landing')">← Go back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LOADING ===================== -->
+<div class="page" id="page-loading">
+  <div id="loading-screen">
+    <div class="loader-logo">🌐 SocialHub</div>
+    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+    <div class="loader-text" id="loader-text">Connecting to TikTok...</div>
+  </div>
+</div>
+
+<!-- ===================== DASHBOARD ===================== -->
+<div class="page" id="page-dashboard">
+  <div id="dashboard">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span>🌐 SocialHub</span>
+      </div>
+      <a class="nav-item active" onclick="switchTab('trending')" href="#">
+        <span class="nav-icon">🔥</span><span>Trending</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('generator')" href="#">
+        <span class="nav-icon">✍️</span><span>AI Generator</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('library')" href="#">
+        <span class="nav-icon">📚</span><span>My Library</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('scheduler')" href="#">
+        <span class="nav-icon">📅</span><span>Scheduler</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('analytics')" href="#">
+        <span class="nav-icon">📊</span><span>Analytics</span>
+      </a>
+      <div class="sidebar-bottom">
+        <div class="user-pill">
+          <div class="user-avatar">L</div>
+          <div class="user-info">
+            <div class="user-name">@user_tiktok</div>
+            <div class="user-platform">● TikTok Connected</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+      <!-- TRENDING TAB -->
+      <div class="tab-view active" id="tab-trending">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">🔥 Trending Videos</div>
+            <div class="dash-subtitle">Discover what's viral right now</div>
+          </div>
+        </div>
+        <div class="search-bar-wrap">
+          <input class="search-input" id="trending-search" placeholder="Search topic (e.g. cooking, fitness, travel...)" onkeydown="if(event.key==='Enter')searchTrending()">
+          <button class="btn-search" onclick="searchTrending()">🔍 Search</button>
+        </div>
+        <div class="platform-filter">
+          <button class="filter-btn active" onclick="filterPlatform(this,'all')">All</button>
+          <button class="filter-btn" onclick="filterPlatform(this,'youtube')">▶ YouTube</button>
+          <button class="filter-btn" onclick="filterPlatform(this,'tiktok')">🎵 TikTok</button>
+          <button class="filter-btn" onclick="filterPlatform(this,'facebook')">📘 Facebook</button>
+        </div>
+        <div class="videos-grid" id="videos-grid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- AI GENERATOR TAB -->
+      <div class="tab-view" id="tab-generator">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">✍️ AI Title & Hashtag Generator</div>
+            <div class="dash-subtitle">Generate viral content with one click</div>
+          </div>
+        </div>
+        <div class="generator-layout">
+          <div class="gen-panel">
+            <h3>⚙️ Configure</h3>
+            <div class="form-group">
+              <label class="form-label">Topic / Niche</label>
+              <input class="form-input" id="gen-topic" placeholder="e.g. morning workout routine, easy recipes...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Content Description (optional)</label>
+              <textarea class="form-textarea" id="gen-desc" placeholder="Describe your video or content idea..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Platforms</label>
+              <div class="platform-check-group">
+                <div class="platform-check selected" data-p="tiktok" onclick="togglePlatform(this)">🎵 TikTok</div>
+                <div class="platform-check selected" data-p="youtube" onclick="togglePlatform(this)">▶ YouTube</div>
+                <div class="platform-check selected" data-p="facebook" onclick="togglePlatform(this)">📘 Facebook</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tone</label>
+              <select class="form-input" id="gen-tone">
+                <option value="viral">🚀 Viral / Clickbait</option>
+                <option value="professional">💼 Professional</option>
+                <option value="funny">😄 Funny / Casual</option>
+                <option value="educational">📚 Educational</option>
+                <option value="inspirational">✨ Inspirational</option>
+              </select>
+            </div>
+            <button class="btn-generate" id="btn-generate" onclick="generateContent()">
+              ✨ Generate with AI
+            </button>
+          </div>
+          <div class="gen-panel output-panel">
+            <h3>🎯 Generated Content</h3>
+            <div id="gen-output">
+              <div class="output-empty">
+                <div class="output-empty-icon">🤖</div>
+                <p>Fill in the form and click Generate<br>to get AI-powered titles & hashtags</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIBRARY TAB -->
+      <div class="tab-view" id="tab-library">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">📚 My Library</div>
+            <div class="dash-subtitle">Your saved videos and content</div>
+          </div>
+        </div>
+        <div class="library-grid" id="library-grid">
+          <div class="empty-library" id="library-empty">
+            <div class="empty-library-icon">📭</div>
+            <p>No saved videos yet.<br>Browse trending videos and save your favorites!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHEDULER TAB -->
+      <div class="tab-view" id="tab-scheduler">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">📅 Content Scheduler</div>
+            <div class="dash-subtitle">Schedule and publish your content</div>
+          </div>
+        </div>
+        <div class="scheduler-layout">
+          <div class="schedule-form">
+            <h3>📤 New Post</h3>
+            <div class="upload-zone" onclick="simulateUpload()">
+              <div class="upload-zone-icon" id="upload-icon">📁</div>
+              <p id="upload-text"><strong>Click to select a video</strong><br>MP4, MOV — up to 500MB</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Caption</label>
+              <textarea class="form-textarea" id="sched-caption" placeholder="Write your caption or use AI Generator..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Publish to</label>
+              <div class="platform-check-group">
+                <div class="platform-check selected" data-sp="tiktok" onclick="this.classList.toggle('selected')">🎵 TikTok</div>
+                <div class="platform-check" data-sp="youtube" onclick="this.classList.toggle('selected')">▶ YouTube</div>
+                <div class="platform-check" data-sp="facebook" onclick="this.classList.toggle('selected')">📘 Facebook</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Best times to post (AI suggested)</label>
+              <div class="time-slots">
+                <div class="time-slot selected" onclick="selectTimeSlot(this)">9:00 AM<span class="slot-label">High reach</span></div>
+                <div class="time-slot" onclick="selectTimeSlot(this)">12:30 PM<span class="slot-label">Peak hours</span></div>
+                <div class="time-slot" onclick="selectTimeSlot(this)">6:00 PM<span class="slot-label">Best for TikTok</span></div>
+                <div class="time-slot" onclick="selectTimeSlot(this)">8:00 PM<span class="slot-label">High engagement</span></div>
+                <div class="time-slot" onclick="selectTimeSlot(this)">10:00 PM<span class="slot-label">Night audience</span></div>
+                <div class="time-slot" onclick="selectTimeSlot(this)">Now<span class="slot-label">Publish immediately</span></div>
+              </div>
+            </div>
+            <button class="btn-schedule" onclick="openPublishModal()">🚀 Publish Now</button>
+          </div>
+          <div class="queue-panel">
+            <h3>📋 Queue</h3>
+            <div id="queue-list">
+              <div class="queue-item">
+                <div class="queue-thumb">🍳</div>
+                <div class="queue-info">
+                  <div class="queue-title">Easy 5-Minute Breakfast</div>
+                  <div class="queue-time">Today at 9:00 AM</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+                    <div class="queue-platforms">
+                      <div class="q-dot" style="background:rgba(255,0,80,0.2);color:#ff0050">T</div>
+                      <div class="q-dot" style="background:rgba(255,0,0,0.2);color:#ff0000">Y</div>
+                    </div>
+                    <span class="status-badge status-scheduled">Scheduled</span>
+                  </div>
+                </div>
+              </div>
+              <div class="queue-item">
+                <div class="queue-thumb">💪</div>
+                <div class="queue-info">
+                  <div class="queue-title">Morning Workout Routine</div>
+                  <div class="queue-time">Tomorrow at 6:00 PM</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+                    <div class="queue-platforms">
+                      <div class="q-dot" style="background:rgba(255,0,80,0.2);color:#ff0050">T</div>
+                    </div>
+                    <span class="status-badge status-scheduled">Scheduled</span>
+                  </div>
+                </div>
+              </div>
+              <div class="queue-item">
+                <div class="queue-thumb">✈️</div>
+                <div class="queue-info">
+                  <div class="queue-title">Hidden Spots in Bali</div>
+                  <div class="queue-time">Yesterday at 8:00 PM</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+                    <div class="queue-platforms">
+                      <div class="q-dot" style="background:rgba(255,0,80,0.2);color:#ff0050">T</div>
+                      <div class="q-dot" style="background:rgba(24,119,242,0.2);color:#1877f2">F</div>
+                    </div>
+                    <span class="status-badge status-published">Published</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS TAB -->
+      <div class="tab-view" id="tab-analytics">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">📊 Analytics</div>
+            <div class="dash-subtitle">Your performance across all platforms</div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Total Views</div>
+            <div class="stat-value">284K</div>
+            <div class="stat-change">↑ +12.4% this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Followers Gained</div>
+            <div class="stat-value">1,847</div>
+            <div class="stat-change">↑ +8.2% this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Posts Published</div>
+            <div class="stat-value">38</div>
+            <div class="stat-change">↑ +5 this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Engagement</div>
+            <div class="stat-value">6.8%</div>
+            <div class="stat-change down">↓ -0.3% this week</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px">
+          <div class="gen-panel">
+            <h3 style="margin-bottom:20px">🎵 TikTok Performance</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Views</span><span style="font-weight:700">142K</span></div>
+                <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden"><div style="width:71%;height:100%;background:linear-gradient(90deg,#ff0050,#ff6b35);border-radius:4px"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Likes</span><span style="font-weight:700">18.4K</span></div>
+                <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden"><div style="width:58%;height:100%;background:linear-gradient(90deg,#ff0050,#ff6b35);border-radius:4px"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Followers</span><span style="font-weight:700">1,240</span></div>
+                <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden"><div style="width:45%;height:100%;background:linear-gradient(90deg,#ff0050,#ff6b35);border-radius:4px"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="gen-panel">
+            <h3 style="margin-bottom:20px">▶ YouTube Performance</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Views</span><span style="font-weight:700">98K</span></div>
+                <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden"><div style="width:49%;height:100%;background:linear-gradient(90deg,#ff0000,#ff6b35);border-radius:4px"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Watch Time</span><span style="font-weight:700">4.2K hrs</span></div>
+                <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden"><div style="width:62%;height:100%;background:linear-gradient(90deg,#ff0000,#ff6b35);border-radius:4px"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Subscribers</span><span style="font-weight:700">607</span></div>
+                <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden"><div style="width:30%;height:100%;background:linear-gradient(90deg,#ff0000,#ff6b35);border-radius:4px"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- PUBLISH MODAL -->
+<div class="modal-overlay" id="publish-modal">
+  <div class="modal" id="modal-content">
+    <div class="modal-icon" id="modal-icon">🚀</div>
+    <h3 id="modal-title">Ready to publish?</h3>
+    <p id="modal-desc">Your content will be published to the selected platforms.</p>
+    <div class="modal-platforms">
+      <div class="modal-platform">
+        <div class="modal-platform-icon" style="background:rgba(255,0,80,0.15)">🎵</div>
+        <div class="modal-platform-name">TikTok</div>
+      </div>
+    </div>
+    <div class="modal-progress"><div class="modal-progress-bar" id="modal-progress-bar"></div></div>
+    <div class="modal-btns" id="modal-btns">
+      <button class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-modal-primary" onclick="startPublish()">Publish Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ <span id="toast-msg"></span></div>
+
+<script>
+// =================== STATE ===================
+let currentPage = 'page-landing';
+let library = [];
+let activeFilter = 'all';
+let videoUploaded = false;
+
+// =================== PAGE NAVIGATION ===================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  currentPage = id;
+  window.scrollTo(0,0);
+}
+
+function goToConnect() {
+  showPage('page-connect');
+}
+
+function connectTikTok() {
+  showPage('page-loading');
+  const texts = ['Connecting to TikTok...', 'Authorizing OAuth...', 'Fetching account info...', 'Setting up your dashboard...'];
+  let i = 0;
+  const interval = setInterval(() => {
+    i++;
+    if (i < texts.length) document.getElementById('loader-text').textContent = texts[i];
+    else {
+      clearInterval(interval);
+      setTimeout(() => {
+        showPage('page-dashboard');
+        renderTrendingVideos(getDefaultVideos());
+      }, 500);
+    }
+  }, 600);
+}
+
+// =================== LANDING LEGAL ===================
+function showLegalPage(page) {
+  document.getElementById('home-section').style.display = page === 'home' ? 'block' : 'none';
+  document.getElementById('terms-section').style.display = page === 'terms' ? 'block' : 'none';
+  document.getElementById('privacy-section').style.display = page === 'privacy' ? 'block' : 'none';
+}
+
+// =================== DASHBOARD TABS ===================
+function switchTab(name) {
+  document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// =================== TRENDING VIDEOS ===================
+function getDefaultVideos() {
+  return [
+    { id:1, title:'I tried the viral 5-minute breakfast meal prep and it changed my mornings', platform:'tiktok', views:'12.4M', emoji:'🍳', channel:'@mealprep_queen', bg:'#1a0a0f' },
+    { id:2, title:'10 hiking trails you NEED to visit before they get crowded (2026)', platform:'youtube', views:'8.2M', emoji:'🏔️', channel:'OutdoorAdventures', bg:'#0a0a1a' },
+    { id:3, title:'POV: You discover this secret beach in Thailand 🌊', platform:'tiktok', views:'34.1M', emoji:'🏖️', channel:'@travel.with.me', bg:'#0a1520' },
+    { id:4, title:'My home gym transformation for under $500 (before/after)', platform:'youtube', views:'5.6M', emoji:'💪', channel:'FitAtHome', bg:'#0a1a0a' },
+    { id:5, title:'The coffee drink everyone is making this winter ☕', platform:'facebook', views:'3.8M', emoji:'☕', channel:'CoffeeLover Community', bg:'#1a1000' },
+    { id:6, title:'I quit my 9-5 and built a $10K/month business (how I did it)', platform:'youtube', views:'18.7M', emoji:'💼', channel:'EntrepreneurMind', bg:'#0f0a1a' },
+    { id:7, title:'This skincare routine cleared my skin in 30 days ✨', platform:'tiktok', views:'22.3M', emoji:'✨', channel:'@glowupjourney', bg:'#1a0a15' },
+    { id:8, title:'Epic road trip across 5 countries in 15 days 🚗', platform:'facebook', views:'2.1M', emoji:'🚗', channel:'Adventure Seekers', bg:'#0a150a' },
+    { id:9, title:'The BEST pasta recipe that went viral for a reason 🍝', platform:'tiktok', views:'44.2M', emoji:'🍝', channel:'@italianfoodlover', bg:'#1a0f00' },
+  ];
+}
+
+function getVideosByTopic(topic) {
+  const t = topic.toLowerCase();
+  const pools = {
+    food: [
+      { id:10, title:`Top ${topic} recipes that are INSANE 🔥`, platform:'tiktok', views:'28.3M', emoji:'🍜', channel:'@foodie_viral', bg:'#1a0a00' },
+      { id:11, title:`I made the best ${topic} video ever 😱`, platform:'youtube', views:'9.1M', emoji:'🍽️', channel:'CookMaster Pro', bg:'#0a1a05' },
+      { id:12, title:`Why everyone is obsessed with ${topic} right now`, platform:'facebook', views:'4.4M', emoji:'😋', channel:'Food Trends Daily', bg:'#1a1a00' },
+    ],
+    default: [
+      { id:13, title:`${topic} is BLOWING UP right now — here's why`, platform:'tiktok', views:'15.6M', emoji:'🔥', channel:'@trending_now', bg:'#1a0a0f' },
+      { id:14, title:`Everything you need to know about ${topic} in 2026`, platform:'youtube', views:'6.2M', emoji:'📱', channel:'TopTrends Channel', bg:'#0a0a1a' },
+      { id:15, title:`The ${topic} trend everyone is talking about`, platform:'facebook', views:'2.8M', emoji:'💬', channel:'Viral Content Hub', bg:'#0a1a10' },
+      { id:16, title:`I tested the viral ${topic} trend — was it worth it?`, platform:'tiktok', views:'31.4M', emoji:'🧪', channel:'@testingtrends', bg:'#0f0a1a' },
+      { id:17, title:`${topic} transformation: 30 days challenge results 💪`, platform:'youtube', views:'11.1M', emoji:'⚡', channel:'ChallengeAccepted', bg:'#1a0f00' },
+      { id:18, title:`How ${topic} changed my life (honest review)`, platform:'tiktok', views:'8.7M', emoji:'💡', channel:'@honest.reviews', bg:'#0a150f' },
+    ]
+  };
+  return pools.default;
+}
+
+function renderTrendingVideos(videos) {
+  const grid = document.getElementById('videos-grid');
+  const filtered = activeFilter === 'all' ? videos : videos.filter(v => v.platform === activeFilter);
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--muted)">No videos found for this platform. Try another filter.</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(v => {
+    const badgeClass = v.platform === 'youtube' ? 'badge-yt' : v.platform === 'tiktok' ? 'badge-tt' : 'badge-fb';
+    const badgeLabel = v.platform === 'youtube' ? '▶ YouTube' : v.platform === 'tiktok' ? '🎵 TikTok' : '📘 Facebook';
+    const saved = library.some(l => l.id === v.id);
+    return `<div class="video-card" data-id="${v.id}">
+      <div class="video-thumb" style="background:${v.bg}">
+        <div class="video-thumb-inner">${v.emoji}</div>
+        <div class="video-platform-badge ${badgeClass}">${badgeLabel}</div>
+        <div class="video-views">👁 ${v.views}</div>
+      </div>
+      <div class="video-info">
+        <div class="video-title">${v.title}</div>
+        <div class="video-meta">
+          <div class="video-channel">${v.channel}</div>
+          <button class="btn-save ${saved?'saved':''}" onclick="saveVideo(${v.id},this)" data-video='${JSON.stringify(v).replace(/'/g,"&#39;")}'>
+            ${saved ? '✓ Saved' : '+ Save'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+let currentVideos = [];
+function searchTrending() {
+  const q = document.getElementById('trending-search').value.trim();
+  if (!q) { showToast('Enter a topic to search', 'error'); return; }
+  const grid = document.getElementById('videos-grid');
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)"><div class="dot-pulse" style="justify-content:center"><span></span><span></span><span></span></div><p style="margin-top:16px">Searching trending videos for "<strong style="color:var(--text)">' + q + '</strong>"...</p></div>';
+  setTimeout(() => {
+    currentVideos = getVideosByTopic(q);
+    renderTrendingVideos(currentVideos);
+  }, 1400);
+}
+
+function filterPlatform(btn, platform) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = platform;
+  const videos = currentVideos.length ? currentVideos : getDefaultVideos();
+  renderTrendingVideos(videos);
+}
+
+function saveVideo(id, btn) {
+  const raw = btn.getAttribute('data-video');
+  const video = JSON.parse(raw.replace(/&#39;/g,"'"));
+  if (!library.some(l => l.id === id)) {
+    library.push(video);
+    btn.classList.add('saved');
+    btn.textContent = '✓ Saved';
+    showToast('Video saved to your library!', 'success');
+    renderLibrary();
+  }
+}
+
+// =================== LIBRARY ===================
+function renderLibrary() {
+  const grid = document.getElementById('library-grid');
+  const empty = document.getElementById('library-empty');
+  if (library.length === 0) {
+    empty.style.display = 'block';
+    grid.innerHTML = '';
+    grid.appendChild(empty);
+    return;
+  }
+  grid.innerHTML = library.map(v => `
+    <div class="lib-card">
+      <div class="lib-thumb" style="background:${v.bg}">${v.emoji}</div>
+      <div class="lib-body">
+        <div class="lib-title">${v.title}</div>
+        <div class="lib-actions">
+          <button class="lib-btn primary" onclick="useInGenerator('${v.title.replace(/'/g,"\\'")}')">✍️ Generate</button>
+          <button class="lib-btn" onclick="removeFromLibrary(${v.id}, this)">🗑 Remove</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function removeFromLibrary(id, btn) {
+  library = library.filter(l => l.id !== id);
+  renderLibrary();
+  showToast('Removed from library', 'success');
+}
+
+function useInGenerator(title) {
+  document.getElementById('gen-topic').value = title;
+  document.getElementById('gen-desc').value = '';
+  switchTab('generator');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item')[1].classList.add('active');
+}
+
+// =================== AI GENERATOR ===================
+function togglePlatform(el) {
+  el.classList.toggle('selected');
+}
+
+async function generateContent() {
+  const topic = document.getElementById('gen-topic').value.trim();
+  if (!topic) { showToast('Please enter a topic first', 'error'); return; }
+  
+  const selectedPlatforms = [...document.querySelectorAll('.platform-check.selected')].map(el => el.dataset.p);
+  if (selectedPlatforms.length === 0) { showToast('Select at least one platform', 'error'); return; }
+  
+  const tone = document.getElementById('gen-tone').value;
+  const desc = document.getElementById('gen-desc').value.trim();
+  
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="dot-pulse"><span></span><span></span><span></span></div> Generating...';
+  
+  document.getElementById('gen-output').innerHTML = `
+    <div class="generating-indicator">
+      <div class="dot-pulse"><span></span><span></span><span></span></div>
+      AI is generating your content...
+    </div>`;
+
+  const prompt = `You are a viral social media content expert. Generate titles and hashtags for the following:
+
+Topic: ${topic}
+${desc ? 'Description: ' + desc : ''}
+Tone: ${tone}
+Platforms: ${selectedPlatforms.join(', ')}
+
+Generate for each platform (only the ones listed):
+- 3 viral title options optimized for that platform's algorithm
+- 15-20 relevant hashtags
+
+Respond ONLY in this exact JSON format, no other text:
+{
+  "platforms": {
+    ${selectedPlatforms.map(p => `"${p}": {"titles": ["title1", "title2", "title3"], "hashtags": ["#tag1", "#tag2", ...]}`).join(',\n    ')}
+  }
+}`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content.map(i => i.text || '').join('');
+    const clean = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    renderGeneratedContent(parsed, selectedPlatforms);
+  } catch(err) {
+    // Fallback with mock data
+    renderGeneratedContent(getMockContent(topic, tone, selectedPlatforms), selectedPlatforms);
+  }
+  
+  btn.disabled = false;
+  btn.innerHTML = '✨ Generate with AI';
+}
+
+function getMockContent(topic, tone, platforms) {
+  const data = { platforms: {} };
+  const toneMap = { viral:'🔥 SHOCKING', professional:'Top', funny:'LOL', educational:'How to', inspirational:'✨' };
+  const prefix = toneMap[tone] || '';
+  platforms.forEach(p => {
+    data.platforms[p] = {
+      titles: [
+        `${prefix} ${topic} that will BLOW YOUR MIND in 2026`,
+        `I tried ${topic} for 30 days and here's what happened...`,
+        `The ${topic} secret nobody is talking about 👀`
+      ],
+      hashtags: [`#${topic.replace(/\s/g,'')}`, `#${topic.replace(/\s/g,'')}2026`, '#viral', '#trending', '#fyp', '#foryou', '#content', '#creator', '#socialmedia', '#growth', '#tips', `#${p}`, '#viral2026', '#trending2026', '#explore']
+    };
+  });
+  return data;
+}
+
+const platformColors = { tiktok:'#ff0050', youtube:'#ff0000', facebook:'#1877f2' };
+const platformEmoji = { tiktok:'🎵', youtube:'▶', facebook:'📘' };
+
+function renderGeneratedContent(data, platforms) {
+  const out = document.getElementById('gen-output');
+  let html = '';
+  platforms.forEach(p => {
+    const pdata = data.platforms[p];
+    if (!pdata) return;
+    const color = platformColors[p];
+    const emoji = platformEmoji[p];
+    html += `<div class="output-block">
+      <div class="output-block-title">
+        <div class="platform-dot-sm" style="background:${color}"></div>
+        ${emoji} ${p.charAt(0).toUpperCase()+p.slice(1)} Titles
+      </div>
+      ${pdata.titles.map(t => `
+        <div class="output-item">
+          <div class="output-item-text">${t}</div>
+          <button class="btn-copy" onclick="copyText(this, '${t.replace(/'/g,"\\'")}')">Copy</button>
+        </div>`).join('')}
+      <div class="output-block-title" style="margin-top:16px">
+        <div class="platform-dot-sm" style="background:${color}"></div>
+        ${emoji} ${p.charAt(0).toUpperCase()+p.slice(1)} Hashtags
+      </div>
+      <div class="hashtags-wrap">
+        ${pdata.hashtags.map(h => `<div class="hashtag-pill" onclick="copyText(null,'${h}')">${h}</div>`).join('')}
+      </div>
+    </div>`;
+  });
+  out.innerHTML = html || '<div class="output-empty"><div class="output-empty-icon">❌</div><p>Could not generate content. Try again.</p></div>';
+  showToast('Content generated successfully!', 'success');
+}
+
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).catch(() => {});
+  if (btn) {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  } else {
+    showToast('Copied to clipboard!', 'success');
+  }
+}
+
+// =================== SCHEDULER ===================
+function selectTimeSlot(el) {
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function simulateUpload() {
+  if (videoUploaded) return;
+  videoUploaded = true;
+  document.getElementById('upload-icon').textContent = '✅';
+  document.getElementById('upload-text').innerHTML = '<strong>my_awesome_video.mp4</strong><br><span style="color:var(--muted);font-size:12px">128MB • Ready to publish</span>';
+  showToast('Video ready!', 'success');
+}
+
+// =================== PUBLISH MODAL ===================
+function openPublishModal() {
+  document.getElementById('publish-modal').classList.add('open');
+  document.getElementById('modal-icon').textContent = '🚀';
+  document.getElementById('modal-title').textContent = 'Ready to publish?';
+  document.getElementById('modal-desc').textContent = 'Your content will be published to TikTok using the Content Posting API.';
+  document.getElementById('modal-progress-bar').style.width = '0%';
+  document.getElementById('modal-btns').innerHTML = `
+    <button class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
+    <button class="btn-modal-primary" onclick="startPublish()">Publish Now</button>`;
+}
+
+function closeModal() {
+  document.getElementById('publish-modal').classList.remove('open');
+}
+
+function startPublish() {
+  document.getElementById('modal-btns').innerHTML = '<div style="color:var(--muted);font-size:14px">Publishing in progress...</div>';
+  document.getElementById('modal-desc').textContent = 'Uploading video to TikTok...';
+  let progress = 0;
+  const bar = document.getElementById('modal-progress-bar');
+  const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 100) progress = 100;
+    bar.style.width = progress + '%';
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        document.getElementById('modal-icon').textContent = '🎉';
+        document.getElementById('modal-title').textContent = 'Published Successfully!';
+        document.getElementById('modal-desc').textContent = 'Your content is now live on TikTok. It may take a few minutes to appear.';
+        document.getElementById('modal-btns').innerHTML = `<button class="btn-modal-primary" onclick="closeModal()">Done ✓</button>`;
+        addToQueue();
+      }, 400);
+    }
+  }, 200);
+}
+
+function addToQueue() {
+  const caption = document.getElementById('sched-caption').value || 'New post';
+  const queueList = document.getElementById('queue-list');
+  const item = document.createElement('div');
+  item.className = 'queue-item';
+  item.innerHTML = `
+    <div class="queue-thumb">🎬</div>
+    <div class="queue-info">
+      <div class="queue-title">${caption.substring(0,30)}...</div>
+      <div class="queue-time">Just now</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+        <div class="queue-platforms"><div class="q-dot" style="background:rgba(255,0,80,0.2);color:#ff0050">T</div></div>
+        <span class="status-badge status-published">Published</span>
+      </div>
+    </div>`;
+  queueList.insertBefore(item, queueList.firstChild);
+}
+
+// =================== TOAST ===================
+function showToast(msg, type) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  toast.className = 'toast ' + (type || 'success');
+  toast.querySelector('span') || (toast.innerHTML = (type==='error'?'❌':'✅') + ' <span id="toast-msg">' + msg + '</span>');
+  document.getElementById('toast-msg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// =================== INIT ===================
+currentVideos = getDefaultVideos();
+renderTrendingVideos(currentVideos);
+</script>
+</body>
+</html>
